@@ -3,6 +3,7 @@ import { useState } from "react";
 import Typer from "@/components/typing/typer";
 import Nav from "./nav";
 import Link from "next/link";
+import MatrixRain from "@/components/matrixRain/matrixRain";
 
 export default function Home() {
   const links = ["Github", "Discord", "Youtube", "X", "Instagram"];
@@ -40,6 +41,7 @@ export default function Home() {
           <Typer speed={10} text={"Software & web developer,\nThis is where I share my projects, experiments, and thoughts.\nfind more about me in the ABOUT page"} />
         </div>
       </div>
+      <MatrixRain />
     </div>
   );
 }
