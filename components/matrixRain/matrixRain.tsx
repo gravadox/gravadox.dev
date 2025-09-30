@@ -15,7 +15,6 @@ export default function MatrixRain() {
     let drops: number[];
     const fontSize = 14;
     const chars = "アカサタナハマヤラワ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    let interval: ReturnType<typeof setInterval>;
 
     function init() {
       width = canvas.clientWidth;
@@ -46,7 +45,7 @@ export default function MatrixRain() {
     }
 
     init();
-    interval = setInterval(draw, 33);
+    const interval = setInterval(draw, 33);
 
     const observer = new ResizeObserver(() => {
       init();
