@@ -15,7 +15,7 @@ export default function MatrixRain() {
     let drops: number[];
     const fontSize = 14;
     const chars = "アカサタナハマヤラワ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    let interval: NodeJS.Timer;
+    let interval: ReturnType<typeof setInterval>;
 
     function init() {
       width = canvas.clientWidth;
