@@ -8,7 +8,7 @@ import Hero from "./hero"
 export default function Home() {
   const [domReady, setDomReady] = useState(false)
   const [modelReady, setModelReady] = useState(false)
-  const blackHoleRef = useRef(false)
+  const blackHoleMounted = useRef(false)
 
   useEffect(() => {
     setDomReady(true)
@@ -18,7 +18,6 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden">
-      {/* Overlay loader until DOM + 3D ready */}
       {!loaded && (
         <div className="inset-0 z-50 flex items-center justify-center fixed top-0 left-0">
           <Loader />
@@ -26,17 +25,19 @@ export default function Home() {
       )}
 
       <Nav />
-      {/* Mount BlackHole once */}
-      {!blackHoleRef.current && (
+
+      {!blackHoleMounted.current && (
         <BlackHole
           onLoad={() => {
-            setModelReady(true)
-            blackHoleRef.current = true
+            if (!blackHoleMounted.current) {
+              blackHoleMounted.current = true
+              setModelReady(true)
+            }
           }}
         />
       )}
 
-      <Hero />
+      {loaded && <Hero />}
     </div>
   )
 }
