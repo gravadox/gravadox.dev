@@ -37,7 +37,7 @@ export default function Hero() {
 
   return (
     <div className={`${flex? "flex justify-between pl-20" : "block"}`}>
-      <div style={{minHeight: "188px"}} className={`${flex? "pt-40" : "pt-24"} min-h-[188px] pr-4`}>
+      <div style={{minHeight: "188px"}} className={`${flex? "pt-40" : "pt-24"} min-h-[258] pr-4`}>
         <div className="min-w-64" style={{ fontSize: fontSize, marginLeft: margin }}>
           <p>
             <Typer
