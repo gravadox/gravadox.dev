@@ -1,47 +1,42 @@
-"use client";
-import { useState } from "react";
-import Typer from "@/components/typing/typer";
-import Nav from "./nav";
-import Link from "next/link";
-import MatrixRain from "@/components/matrixRain/matrixRain";
+"use client"
+import { useEffect, useState, useRef } from "react"
+import Nav from "./nav"
+import Loader from "@/components/loader/loader"
+import BlackHole from "@/components/3d/blackHole"
+import Hero from "./hero"
 
 export default function Home() {
-  const links = ["Github", "Discord", "Youtube", "X", "Instagram"];
-  const hrefs = ["https://github.com/gravadox","https://discord.com","https://youtube.com/@gravadox", "https://x.com/gravadox", "https://instagram.com/gravadoxx"]
-  const [activeIndex, setActiveIndex] = useState(-1);
+  const [domReady, setDomReady] = useState(false)
+  const [modelReady, setModelReady] = useState(false)
+  const blackHoleRef = useRef(false)
 
-  // start the first after page render
-  useState(() => {
-    setTimeout(() => setActiveIndex(0), 600);
-  });
+  useEffect(() => {
+    setDomReady(true)
+  }, [])
+
+  const loaded = domReady && modelReady
 
   return (
-    <div className="min-h-screen w-full">
-      <Nav />
-      <div className="w-full flex items-end p-16 gap-12">
-        <div className="min-w-64">
-          <h1 className="text-5xl min-h-24 mb-8">
-            <Typer text={"welcome,\ni'm graham"} speed={25} />
-          </h1>
+    <div className="relative min-h-screen w-full overflow-hidden">
+      {/* Overlay loader until DOM + 3D ready */}
+      {!loaded && (
+        <div className="inset-0 z-50 flex items-center justify-center fixed top-0 left-0">
+          <Loader />
+        </div>
+      )}
 
-          <div className="flex items-center gap-4 min-h-6 secondary">
-            {links.map((link, i) => (
-              <Link key={link} href={hrefs[i]}>
-                <Typer
-                  text={link}
-                  start={i === activeIndex}
-                  speed={10}
-                  onFinish={() => setActiveIndex(i + 1)}
-                />
-              </Link>
-            ))}
-          </div>
-        </div>
-        <div className="min-h-18 secondary pl-4 border-l">
-          <Typer speed={10} text={"Software & web developer,\nThis is where I share my projects, experiments, and thoughts.\nfind more about me in the ABOUT page"} />
-        </div>
-      </div>
-      <MatrixRain />
+      <Nav />
+      {/* Mount BlackHole once */}
+      {!blackHoleRef.current && (
+        <BlackHole
+          onLoad={() => {
+            setModelReady(true)
+            blackHoleRef.current = true
+          }}
+        />
+      )}
+
+      <Hero />
     </div>
-  );
+  )
 }

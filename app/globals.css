@@ -78,9 +78,11 @@
   --sidebar-ring: oklch(0.708 0 0);
 
   /* custom theme variables*/
-  --theme-background: #121314;
+  --theme-background: #000;
   --theme-foreground: #FFFFFF;
-  --theme-secondary: #747A8C;
+  --theme-secondary: hsla(0, 0%, 100%, 0.57);
+  --theme-secondary-plus: hsla(0, 0%, 100%, 0.31);
+
 }
 
 .dark {
@@ -135,4 +137,7 @@ body{
 
 .secondary{
   color: var(--theme-secondary);
+}
+.secondary-plus{
+  color: var(--theme-secondary-plus);
 }

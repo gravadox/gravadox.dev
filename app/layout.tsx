@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { VT323 ,Geist, Geist_Mono, Poppins } from "next/font/google";
 import "./globals.css";
 import { cookies } from "next/headers";
-import { I18NProvider } from "next/dist/server/lib/i18n-provider";
 import I18nProvider from "@/components/lang/I18nProvider";
 
 const geistSans = Geist({
