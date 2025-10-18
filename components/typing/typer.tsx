@@ -35,7 +35,7 @@ export default function Typer({ text, speed = 50, start = true, onFinish }: Typi
     <span style={{ whiteSpace: "pre-line" }}>
       {displayed}
       {typing && <span className="caret">|</span>}
-      <style jsx>{`
+      <style>{`
         .caret {
           display: inline-block;
           margin-left: 2px;
