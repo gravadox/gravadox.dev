@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useState } from "react"
-import ContributionAscii from "./calender"
+import ContributionAscii from "./calendar"
 
 interface Repo {
   name: string
