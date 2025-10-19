@@ -18,6 +18,8 @@ export default function ContributionAscii({ shrink }: ContributionAsciiProps) {
   const [data, setData] = useState<ApiResponse | null>(null)
   const [year, setYear] = useState<number | null>(null)
   const [open, setOpen] = useState(false)
+  const [activeCell, setActiveCell] = useState<number | null>(null)
+  
   const calenderRef = useRef<HTMLDivElement>(null)
   const btnRef = useRef<HTMLButtonElement | null>(null)
   const [optionsWidth, setOptionsWidth] = useState(0)
@@ -104,19 +106,29 @@ if(data)
   className={`overflow-x-auto ${shrink ? "w-full" : "max-w-[1000px]"}`}
 >
   <div className="grid grid-flow-col grid-rows-5 gap-[2px] pb-6">
-    {data.calendar.map((d, i) => (
-      <div
-        key={i}
-        className="relative w-6 h-6 flex items-center justify-center rounded-[1px] group"
-      >
-        <div className="w-full h-full flex items-center justify-center rounded transition-colors duration-150 bg-transparent group-hover:bg-zinc-800">
-          {d.symbol}
+      {data.calendar.map((d, i) => (
+        <div
+          key={i}
+          className="relative w-6 h-6 flex items-center justify-center rounded-[1px] group"
+          onTouchStart={() => setActiveCell(i)}
+          onTouchEnd={() => setTimeout(() => setActiveCell(null), 1500)}
+        >
+          <div
+            className={`w-full h-full flex items-center justify-center rounded transition-colors duration-150 
+              ${activeCell === i ? "bg-zinc-800" : "bg-transparent"} 
+              group-hover:bg-zinc-800`}
+          >
+            {d.symbol}
+          </div>
+          <div
+            className={`absolute top-full mb-1 left-1/2 -translate-x-1/2 px-2 py-1 text-xs rounded bg-zinc-800 text-white z-10 
+              opacity-0 ${activeCell === i ? "opacity-100" : ""} 
+              group-hover:opacity-100 pointer-events-none whitespace-nowrap`}
+          >
+            {d.date} | {d.count}
+          </div>
         </div>
-        <div className="absolute top-full mb-1 left-1/2 -translate-x-1/2 px-2 py-1 text-xs rounded bg-zinc-800 text-white z-10 opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap">
-          {d.date} | {d.count}
-        </div>
-      </div>
-    ))}
+      ))}
   </div>
 </div>
 
