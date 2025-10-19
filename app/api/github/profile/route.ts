@@ -1,4 +1,3 @@
-import type { NextRequest } from "next/server"
 import { NextResponse } from "next/server"
 
 interface Repo {
@@ -52,7 +51,7 @@ interface GraphQLResponse {
   }
 }
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   const username = "gravadox"
   const token = process.env.GITHUB_TOKEN
   if (!token) return NextResponse.json({ error: "GITHUB_TOKEN not set" }, { status: 500 })

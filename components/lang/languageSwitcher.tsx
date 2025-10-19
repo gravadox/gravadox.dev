@@ -3,7 +3,6 @@
 import * as React from "react";
 import i18n from "@/components/lang/i18n";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
 
 export default function LanguageSwitcher() {
   const [currentLang, setCurrentLang] = React.useState(i18n.language);

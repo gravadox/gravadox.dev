@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { VT323 ,Geist, Geist_Mono, Poppins } from "next/font/google";
+import { VT323 ,Geist } from "next/font/google";
 import "./globals.css";
 import { cookies } from "next/headers";
 import I18nProvider from "@/components/lang/I18nProvider";
@@ -9,10 +9,7 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+
 
 const vt323 = VT323({
   variable: "--font-vt323",
@@ -20,11 +17,6 @@ const vt323 = VT323({
   subsets: ["latin"]
 })
 
-const poppins = Poppins({
-  variable: "--font-poppins",
-  weight: "400",
-  subsets: ["latin"]
-})
 
 export const metadata: Metadata = {
   title: "Gravadox",
@@ -46,7 +38,7 @@ export default async function RootLayout({
   return (
     <html lang={lang} className="dark">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${vt323.className} antialiased`}
+        className={`${geistSans.variable} ${vt323.className} antialiased`}
       >
         <I18nProvider lang={lang || "en"}>
           {children}

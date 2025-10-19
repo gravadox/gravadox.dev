@@ -1,6 +1,7 @@
 "use client"
 import React, { useEffect, useState } from "react"
 import ContributionAscii from "./calendar"
+import Image from "next/image"
 
 interface Repo {
   name: string
@@ -53,10 +54,10 @@ export default function GitHubProfile({ onLoad }: { onLoad?: () => void }) {
   }, [])
   if (loading) return null 
   return (
-    <div className={`px-4 ${shrink ? "block" : "flex"} w-full justify-center h-screen`}>
+    <div className={`px-4 ${shrink ? "block" : "flex"} w-full justify-center min-h-screen`}>
       <div className={`shrink-0 ${shrink ? "flex" : ""} ${font ? "text-sm" : ""}`}>
         {data?.avatar && data.username &&
-        <img
+        <Image
           src={data.avatar}
           alt={data.username}
           className={phone ? "w-40 h-40" : shrink ? "w-64 h-64" : "w-80 h-80"}
@@ -83,7 +84,7 @@ export default function GitHubProfile({ onLoad }: { onLoad?: () => void }) {
         </div>
       </div>
 
-      <div className="w-full pl-4 max-w-[1000px]">
+      <div className={`w-full ${phone? "pl-0": "pl-4"} max-w-[1000px]`}>
           {data?.repos && 
           <>
         <h3 className="font-semibold">Recent Repos:</h3>

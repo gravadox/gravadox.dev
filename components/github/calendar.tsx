@@ -16,20 +16,17 @@ interface ContributionAsciiProps {
 }
 export default function ContributionAscii({ shrink }: ContributionAsciiProps) {
   const [data, setData] = useState<ApiResponse | null>(null)
-  const [loading, setLoading] = useState(true)
   const [year, setYear] = useState<number | null>(null)
   const [open, setOpen] = useState(false)
   const calenderRef = useRef<HTMLDivElement>(null)
   const btnRef = useRef<HTMLButtonElement | null>(null)
   const [optionsWidth, setOptionsWidth] = useState(0)
   const fetchData = (y?: number) => {
-    setLoading(true)
     const url = y ? `/api/github/contributions?year=${y}` : `/api/github/contributions`
     fetch(url)
       .then(r => r.json())
       .then(json => setData(json?.calendar ? json : null))
       .catch(() => setData(null))
-      .finally(() => setLoading(false))
   }
 
   useEffect(() => { fetchData() }, [])
@@ -37,7 +34,9 @@ export default function ContributionAscii({ shrink }: ContributionAsciiProps) {
   useEffect(() => {
     if (!calenderRef.current || !data) return
     requestAnimationFrame(() => {
-      calenderRef.current!.scrollLeft = calenderRef.current!.scrollWidth - 30
+      calenderRef.current!.scrollLeft = calenderRef.current!.scrollWidth 
+      calenderRef.current!.scrollLeft -= 30 
+    
     })
     setOptionsWidth(calenderRef.current?.clientWidth)
   }, [data])
@@ -96,27 +95,32 @@ if(data)
       </div>
 
       <div className="flex">
-        <div className="flex flex-col gap-1 mr-2">
+        <div className="flex flex-col mr-2 gap-0.5">
           {Array(5).fill("[").map((s, i) => <p key={i}>{s}</p>)}
         </div>
 
-        <div ref={calenderRef} className={`overflow-x-auto ${shrink ? "w-full" : "max-w-[1000px]"}`}>
-          <div className="grid grid-cols-73 gap-2 min-w-96 pb-6">
-
-            {data.calendar.map((d, i) => (
-              <div key={i} className="relative group w-5 h-5 flex items-center justify-center rounded-[1px]">
-                <div className="w-full h-full flex items-center justify-center rounded transition-colors duration-150 bg-transparent group-hover:bg-zinc-800">
-                  {d.symbol}
-                </div>
-                <div className="absolute top-full mb-1 left-1/2 -translate-x-1/2 px-2 py-1 text-xs rounded bg-zinc-800 text-white z-10 opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap">
-                  {d.date} | {d.count}
-                </div>
-              </div>
-            ))}
-          </div>
+<div
+  ref={calenderRef}
+  className={`overflow-x-auto ${shrink ? "w-full" : "max-w-[1000px]"}`}
+>
+  <div className="grid grid-flow-col grid-rows-5 gap-[2px] pb-6">
+    {data.calendar.map((d, i) => (
+      <div
+        key={i}
+        className="relative w-6 h-6 flex items-center justify-center rounded-[1px] group"
+      >
+        <div className="w-full h-full flex items-center justify-center rounded transition-colors duration-150 bg-transparent group-hover:bg-zinc-800">
+          {d.symbol}
         </div>
+        <div className="absolute top-full mb-1 left-1/2 -translate-x-1/2 px-2 py-1 text-xs rounded bg-zinc-800 text-white z-10 opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap">
+          {d.date} | {d.count}
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
 
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-0.5">
           {Array(5).fill("]").map((s, i) => <p key={i}>{s}</p>)}
         </div>
       </div>

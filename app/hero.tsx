@@ -15,7 +15,6 @@ export default function Hero() {
 
   const [step, setStep] = useState(0);
   const [activeIndex, setActiveIndex] = useState(-1);
-  const [fontSize, setFontSize] = useState(18);
   const [margin, setMargin] = useState(false)
 
   useEffect(() => {
@@ -34,7 +33,7 @@ export default function Hero() {
   return (
     <div>
       <div style={{minHeight: "188px"}} className={`${margin? "pt-24": "pt-40"} min-h-[258] pr-4`}>
-        <div className="min-w-64" style={{ fontSize: fontSize }}>
+        <div className="min-w-64">
           <p>
             <Typer
               text={"WELCOME, I'M GRAHAM"}
