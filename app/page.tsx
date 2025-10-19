@@ -1,20 +1,26 @@
 "use client"
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState } from "react"
 import Nav from "./nav"
 import Loader from "@/components/loader/loader"
 import BlackHole from "@/components/3d/blackHole"
 import Hero from "./hero"
+import GitHubProfile from "@/components/github/profile"
 
 export default function Home() {
   const [domReady, setDomReady] = useState(false)
-  const [modelReady, setModelReady] = useState(false)
-  const blackHoleMounted = useRef(false)
+  const [blackHoleReady, setBlackHoleReady] = useState(false)
+  const [githubReady, setGithubReady] = useState(false)
+  const [flex, setFlex] = useState(false)
 
   useEffect(() => {
     setDomReady(true)
+    setFlex(innerWidth >= 700)
+    const onResize = () => setFlex(innerWidth >= 700)
+    window.addEventListener("resize", onResize)
+    return () => window.removeEventListener("resize", onResize)
   }, [])
 
-  const loaded = domReady && modelReady
+  const loaded = blackHoleReady && githubReady
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden">
@@ -26,18 +32,13 @@ export default function Home() {
 
       <Nav />
 
-      {!blackHoleMounted.current && (
-        <BlackHole
-          onLoad={() => {
-            if (!blackHoleMounted.current) {
-              blackHoleMounted.current = true
-              setModelReady(true)
-            }
-          }}
-        />
-      )}
+      <div className={`${flex ? "flex" : "block"} p-6 justify-between h-screen pt-40`}>
+        {loaded && domReady && <Hero />}
 
-      {loaded && <Hero />}
+        <BlackHole onLoad={() => setBlackHoleReady(true)} />
+      </div>
+
+        <GitHubProfile onLoad={() => setGithubReady(true)} />
     </div>
   )
 }

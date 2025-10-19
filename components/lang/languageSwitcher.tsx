@@ -18,9 +18,9 @@ export default function LanguageSwitcher() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="transparent" className="text-[16px]">
+        <div>
           {currentLang}
-        </Button>
+        </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="flex flex-col justify-center !max-w-20">
         <DropdownMenuItem className="flex justify-center" onClick={() => changeLanguage("en")}>English</DropdownMenuItem>

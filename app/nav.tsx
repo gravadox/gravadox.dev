@@ -14,7 +14,7 @@ export default function Nav(){
         return () => window.removeEventListener("resize", handleResize);
       }, []);
     return(
-        <>
+        <div className="w-full bg-black p-2 absolute">
         <div className="w-full flex items-center justify-between p-4">
             {!drown && 
             <div className="w-full flex items-center gap-6 justify-start">
@@ -39,7 +39,7 @@ export default function Nav(){
             </div>
         }
 
-        </>
+        </div>
 
     )
 }

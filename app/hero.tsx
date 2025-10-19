@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import Typer from "@/components/typing/typer";
 import Link from "next/link";
-import BlackHole from "@/components/3d/blackHole";
 
 export default function Hero() {
   const links = ["Github", "Discord", "Youtube", "X", "Instagram"];
@@ -16,9 +15,8 @@ export default function Hero() {
 
   const [step, setStep] = useState(0);
   const [activeIndex, setActiveIndex] = useState(-1);
-  const [fontSize, setFontSize] = useState(18); // default 18px
-  const [margin, setMargin] = useState(0)
-  const [flex, setFlex] = useState(true)
+  const [fontSize, setFontSize] = useState(18);
+  const [margin, setMargin] = useState(false)
 
   useEffect(() => {
     if (step === 2) setTimeout(() => setActiveIndex(0), 200);
@@ -26,9 +24,7 @@ export default function Hero() {
 
   useEffect(() => {
     const handleResize = () => {
-      // setFontSize((innerWidth < 700)? 16 : 18)
-      setMargin((innerWidth < 800)? 15 : 0)
-      setFlex((innerWidth< 700)? false : true)
+      setMargin((innerWidth < 700)? true : false)
     };
     handleResize();
     window.addEventListener("resize", handleResize);
@@ -36,9 +32,9 @@ export default function Hero() {
   }, []);
 
   return (
-    <div className={`${flex? "flex justify-between pl-20" : "block"}`}>
-      <div style={{minHeight: "188px"}} className={`${flex? "pt-40" : "pt-24"} min-h-[258] pr-4`}>
-        <div className="min-w-64" style={{ fontSize: fontSize, marginLeft: margin }}>
+    <div>
+      <div style={{minHeight: "188px"}} className={`${margin? "pt-24": "pt-40"} min-h-[258] pr-4`}>
+        <div className="min-w-64" style={{ fontSize: fontSize }}>
           <p>
             <Typer
               text={"WELCOME, I'M GRAHAM"}
@@ -77,7 +73,6 @@ export default function Hero() {
           )}
         </div>
       </div>
-      <BlackHole />
     </div>
   );
 }
