@@ -162,7 +162,7 @@ export default function BlackHole({ onLoad }: { onLoad?: () => void }) {
       const zoom = (innerWidth < 500)? 1.37 * (innerHeight/innerWidth) : 1.17 *(innerHeight/innerWidth)
       const width = (innerWidth < 700)? innerWidth-50  : innerWidth/2
       const height = innerWidth<700 ? 700 : 500
-      const asciiResolutionX = (innerWidth < 700)? innerWidth/0.9 : innerWidth/2
+      const asciiResolutionX = (innerWidth < 400)? innerWidth/0.9 : innerWidth/2
       const asciiResolutionY = (innerWidth < 700)? innerHeight/0.9 : innerHeight/2
 
       camera.left = (window.innerWidth / -2) * zoom
@@ -178,7 +178,7 @@ export default function BlackHole({ onLoad }: { onLoad?: () => void }) {
 
 
     }
-
+    onWindowResize()
     window.addEventListener("resize", onWindowResize)
 
     function animate() {

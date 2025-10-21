@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useMemo } from "react"
 import Nav from "./nav"
 import Loader from "@/components/loader/loader"
 import BlackHole from "@/components/3d/blackHole"
@@ -22,6 +22,15 @@ export default function Home() {
 
   const loaded = blackHoleReady && githubReady
 
+  // thanks to whoever tf invented useMemo
+  const githubProfile = useMemo(() => (
+    <GitHubProfile onLoad={() => setGithubReady(true)} />
+  ), [])
+
+  const blackHole = useMemo(() => (
+  <BlackHole onLoad={() => setBlackHoleReady(true)} />
+), [])
+
   return (
     <div className="relative min-h-screen w-full overflow-hidden">
       {!loaded && (
@@ -34,11 +43,10 @@ export default function Home() {
 
       <div className={`${flex ? "flex" : "block"} p-6 justify-between h-screen pt-40`}>
         {loaded && domReady && <Hero />}
-
-        <BlackHole onLoad={() => setBlackHoleReady(true)} />
+        {blackHole}
       </div>
 
-        <GitHubProfile onLoad={() => setGithubReady(true)} />
+      {githubProfile}
     </div>
   )
 }

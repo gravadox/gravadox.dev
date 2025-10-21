@@ -33,6 +33,7 @@ export default function GitHubProfile({ onLoad }: { onLoad?: () => void }) {
   const [font, setFont] = useState(false)
 
   useEffect(() => {
+    // console.log("Fetching GitHub data")
     fetch("/api/github/profile")
       .then(res => res.json())
       .then(setData)
@@ -59,6 +60,8 @@ export default function GitHubProfile({ onLoad }: { onLoad?: () => void }) {
         {data?.avatar && data.username &&
         <Image
           src={data.avatar}
+          width={460}
+          height={460}
           alt={data.username}
           className={phone ? "w-40 h-40" : shrink ? "w-64 h-64" : "w-80 h-80"}
         />
@@ -84,7 +87,15 @@ export default function GitHubProfile({ onLoad }: { onLoad?: () => void }) {
         </div>
       </div>
 
-      <div className={`w-full ${phone? "pl-0": "pl-4"} max-w-[1000px]`}>
+<div
+  className={`transition-all duration-300 ${
+    phone
+      ? "w-full pl-0"
+      : shrink
+      ? "w-[100%]"
+      : "w-[65%] max-w-[1000px] pl-4"
+  }`}
+>
           {data?.repos && 
           <>
         <h3 className="font-semibold">Recent Repos:</h3>

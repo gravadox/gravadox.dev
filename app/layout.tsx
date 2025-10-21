@@ -33,7 +33,6 @@ export default async function RootLayout({
   
   const cookieStore = cookies();
   const lang =  (await cookieStore).get("i18next")?.value
-  console.log(lang)
 
   return (
     <html lang={lang} className="dark">

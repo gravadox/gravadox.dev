@@ -111,7 +111,7 @@ if(data)
           key={i}
           className="relative w-6 h-6 flex items-center justify-center rounded-[1px] group"
           onTouchStart={() => setActiveCell(i)}
-          onTouchEnd={() => setTimeout(() => setActiveCell(null), 1500)}
+          onTouchEnd={() => setTimeout(() => setActiveCell(null), 5000)}
         >
           <div
             className={`w-full h-full flex items-center justify-center rounded transition-colors duration-150 
