@@ -15,16 +15,19 @@ export default function Hero() {
 
   const [step, setStep] = useState(0);
   const [activeIndex, setActiveIndex] = useState(-1);
-  const [margin, setMargin] = useState(false)
+  const [margin, setMargin] = useState(false);
 
   useEffect(() => {
     if (step === 2) setTimeout(() => setActiveIndex(0), 200);
   }, [step]);
 
   useEffect(() => {
-    const handleResize = () => {
-      setMargin((innerWidth < 700)? true : false)
-    };
+    if (activeIndex === links.length && step === 2)
+      setTimeout(() => setStep(3), 500);
+  }, [activeIndex, step]);
+
+  useEffect(() => {
+    const handleResize = () => setMargin(innerWidth < 700);
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -32,7 +35,10 @@ export default function Hero() {
 
   return (
     <div>
-      <div style={{minHeight: "188px"}} className={`${margin? "pt-24": "pt-40"} min-h-[258] pr-4`}>
+      <div
+        style={{ minHeight: "188px" }}
+        className={`${margin ? "pt-24" : "pt-40"} min-h-[258] pr-4`}
+      >
         <div className="min-w-64">
           <p>
             <Typer
@@ -57,17 +63,31 @@ export default function Hero() {
           )}
 
           {step >= 2 && (
-            <div className="flex items-center gap-4 min-h-6 secondary-plus">
-              {links.map((link, i) => (
-                <Link key={link} href={hrefs[i]}>
+            <div className="flex flex-col secondary-plus">
+              <div className="flex items-center gap-4 min-h-6">
+                {links.map((link, i) => (
+                  <Link key={link} href={hrefs[i]}>
+                    <Typer
+                      text={link}
+                      start={i === activeIndex}
+                      speed={10}
+                      onFinish={() => setActiveIndex(i + 1)}
+                    />
+                  </Link>
+                ))}
+              </div>
+
+              {step >= 3 && (
+                <Link className="secondary-plus"
+                href="mailto:contact@gravadox.dev"
+                >
                   <Typer
-                    text={link}
-                    start={i === activeIndex}
-                    speed={10}
-                    onFinish={() => setActiveIndex(i + 1)}
+                    text={"contact@gravadox.dev"}
+                    speed={15}
+                    start={step === 3}
                   />
                 </Link>
-              ))}
+              )}
             </div>
           )}
         </div>
