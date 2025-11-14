@@ -1,5 +1,6 @@
-import { BlockType } from "./lib/generated/prisma/enums"
-import { JsonValue } from "./lib/generated/prisma/internal/prismaNamespace"
+import { BlockType } from "@prisma/client"
+import { JsonValue } from "@prisma/client/runtime/library"
+
 
 export interface TextData { text: string }
 export interface ImageData { src: string }
