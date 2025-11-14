@@ -79,7 +79,7 @@
 
   /* custom theme variables*/
   --theme-background: #000;
-  --theme-foreground: #FFFFFF;
+  --theme-foreground: #9f9fa9;
   --theme-secondary: hsla(0, 0%, 100%, 0.57);
   --theme-secondary-plus: hsla(0, 0%, 100%, 0.31);
 
@@ -124,7 +124,7 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background ;
   }
 }
 
@@ -141,3 +141,17 @@ body{
 .secondary-plus{
   color: var(--theme-secondary-plus);
 }
+/* ---break---*/
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+
+
+/* Animations */
+

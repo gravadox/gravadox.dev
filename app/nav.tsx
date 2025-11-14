@@ -14,15 +14,15 @@ export default function Nav(){
         return () => window.removeEventListener("resize", handleResize);
       }, []);
     return(
-        <div className="w-full bg-black p-2 absolute">
+        <div className="w-full bg-black p-2">
         <div className="w-full flex items-center justify-between p-4">
             {!drown && 
             <div className="w-full flex items-center gap-6 justify-start">
                 <Link href="/cv">CURRICULUM VITAE</Link>
-                <Link href="projects">PROJECTS</Link>
-                <Link href="blog">BLOG</Link>
-                <Link href="about">ABOUT</Link>
-                <Link href="contact">CONTACT</Link>
+                <Link href="/projects">PROJECTS</Link>
+                <Link href="/blog">BLOG</Link>
+                <Link href="/about">ABOUT</Link>
+                <Link href="/contact">CONTACT</Link>
             </div>
             }
 
@@ -30,12 +30,12 @@ export default function Nav(){
             <div className="w-full flex justify-end"><LanguageSwitcher /></div>
         </div>
                 {drown && 
-            <div className="w-full flex items-center gap-6 justify-between px-4">
+            <div className="w-full flex items-center gap-6 justify-between px-2">
                 <Link href="/cv">CURRICULUM VITAE</Link>
-                <Link href="projects">PROJECTS</Link>
-                <Link href="blog">BLOG</Link>
-                <Link href="about">ABOUT</Link>
-                <Link href="contact">CONTACT</Link>
+                <Link href="/projects">PROJECTS</Link>
+                <Link href="/blog">BLOG</Link>
+                <Link href="/about">ABOUT</Link>
+                <Link href="/contact">CONTACT</Link>
             </div>
         }
 

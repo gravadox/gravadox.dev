@@ -3,6 +3,7 @@ import { VT323 ,Geist } from "next/font/google";
 import "./globals.css";
 import { cookies } from "next/headers";
 import I18nProvider from "@/components/lang/I18nProvider";
+import { Toaster } from "sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,6 +42,7 @@ export default async function RootLayout({
       >
         <I18nProvider lang={lang || "en"}>
           {children}
+          <Toaster />
         </I18nProvider>
       </body>
     </html>

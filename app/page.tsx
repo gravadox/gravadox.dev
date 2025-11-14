@@ -32,7 +32,7 @@ export default function Home() {
 ), [])
 
   return (
-    <div className="relative min-h-screen w-full overflow-hidden">
+    <div className="relative min-h-screen w-full overflow-hidden text-white">
       {!loaded && (
         <div className="inset-0 z-50 flex items-center justify-center fixed top-0 left-0">
           <Loader />

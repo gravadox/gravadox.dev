@@ -1,0 +1,84 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model App {
+  id          String      @id @default(cuid())
+  title       String
+  description String?
+  icon        String?
+  banner      String?
+  version     String?
+
+  downloads   Downloads[] @relation("AppDownloads")
+
+  github      String?
+
+  slug        String      @unique
+  tags        String[]
+  blocks      Block[]     @relation("AppBlocks")
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  publishAt   DateTime?
+  pinned      Int?
+}
+
+model Downloads {
+  id     String  @id @default(cuid())
+  name   String
+  link     String
+
+  appId  String
+  app    App     @relation("AppDownloads", fields: [appId], references: [id], onDelete: Cascade)
+}
+
+model Post {
+  id          String  @id @default(cuid())
+  title       String
+  description String?
+  banner      String?
+  slug        String  @unique
+  tags        String[]
+  blocks      Block[] @relation("PostBlocks")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  publishAt   DateTime?
+  pinned      Int?
+}
+
+model Block {
+  id        String   @id @default(cuid())
+
+  postId    String?
+  post      Post?     @relation("PostBlocks", fields: [postId], references: [id], onDelete: Cascade)
+
+  appId     String?
+  app       App?      @relation("AppBlocks", fields: [appId], references: [id], onDelete: Cascade)
+
+  type      BlockType
+  data      Json
+  createdAt DateTime @default(now())
+}
+
+enum BlockType {
+  TEXT
+  IMAGE
+  VIDEO
+  CODE
+  EMBED
+  BUTTON
+  CANVAS
+}
