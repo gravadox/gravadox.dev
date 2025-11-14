@@ -1,5 +1,6 @@
 "use server"
 
+import { requireAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { BlockType, Prisma } from "@prisma/client"
 
@@ -43,6 +44,7 @@ export interface postInput {
 // apps
 
 export async function createApp(data: App) {
+  await requireAdmin()
   const { title, description,icon, banner,version, slug, tags, publishAt, pinned, blocks, downloads, github } = data
 
   const sanitizedBlocks = blocks.map(b => ({
@@ -73,10 +75,12 @@ export async function createApp(data: App) {
 }
 
 export async function getAppById(id: string) {
+  await requireAdmin()
   return db.app.findUnique({ where: { id }, include: { blocks: true, downloads: true } })
 }
 
 export async function updateApp(id: string, data: App) {
+  await requireAdmin()
   const { title, description, icon, banner,version, slug, tags, publishAt, pinned, blocks, downloads, github } = data
 
   const sanitizedBlocks = blocks.map(b => ({
@@ -107,12 +111,14 @@ export async function updateApp(id: string, data: App) {
 }
 
 export async function deleteApp(id: string) {
+  await requireAdmin()
   return db.app.delete({ where: { id } })
 }
 
 // posts
 
 export async function createPost(data: postInput) {
+  await requireAdmin()
   const { title, description, banner, slug, tags, publishAt, pinned, blocks } = data
 
   const sanitizedBlocks = blocks.map(b => ({
@@ -139,10 +145,12 @@ export async function createPost(data: postInput) {
 }
 
 export async function getPostById(id: string) {
+  await requireAdmin()
   return db.post.findUnique({ where: { id }, include: { blocks: true } })
 }
 
 export async function updatePost(id: string, data: postInput) {
+  await requireAdmin()
   const { title, description, banner, slug, tags, publishAt, pinned, blocks } = data
   const sanitizedBlocks = blocks.map(b => ({
     type: b.type,
@@ -159,7 +167,7 @@ export async function updatePost(id: string, data: postInput) {
 }
 
 export async function deletePost(id: string) {
-
+  await requireAdmin()
   return db.post.delete({
     where: { id },
   })
