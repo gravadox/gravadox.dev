@@ -1,7 +1,7 @@
 "use server"
 
 import { db } from "@/lib/db"
-import { BlockType, Prisma } from "@/lib/generated/prisma/client"
+import { BlockType, Prisma } from "@prisma/client"
 
 export interface BlockInput {
   type: BlockType

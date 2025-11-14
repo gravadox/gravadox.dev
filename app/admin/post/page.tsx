@@ -4,7 +4,7 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { createPost } from "@/actions/admin"
 import type { BlockInput } from "@/actions/admin"
-import { BlockType } from "@/lib/generated/prisma/client"
+import { BlockType } from "@prisma/client"
 import { toast } from "sonner"
 
 import TextBlock from "@/components/blog/text/text"

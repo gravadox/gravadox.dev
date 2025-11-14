@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 
 import type { BlockInput, DownloadInput } from "@/actions/admin"
-import { BlockType } from "@/lib/generated/prisma/client"
+import { BlockType } from "@prisma/client"
 
 import TextBlock from "@/components/blog/text/text"
 import ImageBlock from "@/components/blog/image/blogImage"
