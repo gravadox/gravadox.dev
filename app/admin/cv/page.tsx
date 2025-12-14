@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { saveCV, getCv } from "@/actions/cv"
 import ExperienceTimeline from "@/components/cv/experience";
-import { Prisma } from "@/lib/generated/prisma/browser";
+import { Prisma } from "@prisma/client";
 import { Home, Mail, Phone } from "@/icons";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
