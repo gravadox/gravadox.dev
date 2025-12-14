@@ -1,6 +1,35 @@
 {
-    "common":{
+    "common": {
         "lang": "DE",
-        "language": "german"
+        "language": "deutsch"
+    },
+    "nav": {
+        "cv": "LEBENSLAUF",
+        "projects": "PROJEKTE",
+        "blog": "BLOG",
+        "about": "ÜBER MICH",
+        "contact": "KONTAKT",
+        "sideBar": {
+            "posts": "Beiträge",
+            "projects": "Projekte"
+        }
+    },
+    "hero": {
+        "title": "WILLKOMMEN, ICH BIN GRAHAM",
+        "description": "Software- & Webentwickler,\nHier teile ich meine Projekte und Experimente.\nMehr über mich findest du auf der ÜBER-MICH-Seite"
+    },
+    "github": {
+        "followers": "Follower",
+        "following": "Folge ich",
+        "stars": "Sterne",
+        "recent": "Neueste Repositories:",
+        "total": "Gesamtbeiträge",
+        "current": "aktuell"
+    },
+    "contact": {
+        "contact": "Kontakt",
+        "message": "Nachricht",
+        "send": "Senden",
+        "socials": "Soziale Netzwerke"
     }
 }

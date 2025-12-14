@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/sidebar"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 import Link from "next/link"
+import { useAppTranslation } from "../lang/useAppTranslation"
 
 interface Posts {
   id: string
@@ -55,12 +56,13 @@ export function SideBarClient({
   apps: Apps[]
   activeId?: string
 }) {
+  const {t} = useAppTranslation()
   const pathname = usePathname()
   const [open, setOpen] = useState<{ [key: string]: boolean }>({})
   const [close, setClose] = useState<boolean>(false)
   const categories = [
-    { title: "projects", path: "/projects", icon: AppWindow, items: apps },
-    { title: "posts", path: "/blog", icon: Book, items: posts },
+    { title: t("nav.sideBar.projects"), path: "/projects", icon: AppWindow, items: apps },
+    { title: t("nav.sideBar.posts"), path: "/blog", icon: Book, items: posts },
   ]
 
   useEffect(() => {

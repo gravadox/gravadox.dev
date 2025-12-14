@@ -2,8 +2,10 @@
 import { useState, useEffect } from "react";
 import Typer from "@/components/typing/typer";
 import Link from "next/link";
+import { useAppTranslation } from "@/components/lang/useAppTranslation";
 
 export default function Hero() {
+  const {t} = useAppTranslation()
   const links = ["Github", "Discord", "Youtube", "X", "Instagram"];
   const hrefs = [
     "https://github.com/gravadox",
@@ -42,7 +44,7 @@ export default function Hero() {
         <div className="min-w-64">
           <p>
             <Typer
-              text={"WELCOME, I'M GRAHAM"}
+              text={t("hero.title")}
               speed={25}
               start={step === 0}
               onFinish={() => setStep(1)}
@@ -54,9 +56,7 @@ export default function Hero() {
               <Typer
                 speed={10}
                 start={step === 1}
-                text={
-                  "Software & web developer,\nThis is where I share my projects & experiments.\nfind more about me in the ABOUT page"
-                }
+                text={t("hero.description")}
                 onFinish={() => setStep(2)}
               />
             </div>

@@ -1,9 +1,11 @@
 "use client"
 import LanguageSwitcher from "@/components/lang/languageSwitcher";
+import { useAppTranslation } from "@/components/lang/useAppTranslation";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function Nav(){
+    const {t} = useAppTranslation()
     const [drown, setDrown] = useState(false)
       useEffect(() => {
         const handleResize = () => {
@@ -18,11 +20,11 @@ export default function Nav(){
         <div className="w-full flex items-center justify-between p-4">
             {!drown && 
             <div className="w-full flex items-center gap-6 justify-start">
-                <Link href="/cv">CURRICULUM VITAE</Link>
-                <Link href="/projects">PROJECTS</Link>
-                <Link href="/blog">BLOG</Link>
-                <Link href="/about">ABOUT</Link>
-                <Link href="/contact">CONTACT</Link>
+                <Link href="/cv">{t("nav.cv")}</Link>
+                <Link href="/projects">{t("nav.projects")}</Link>
+                <Link href="/blog">{t("nav.blog")}</Link>
+                <Link href="/about">{t("nav.about")}</Link>
+                <Link href="/contact">{t("nav.contact")}</Link>
             </div>
             }
 
@@ -31,11 +33,11 @@ export default function Nav(){
         </div>
                 {drown && 
             <div className="w-full flex items-center gap-6 justify-between px-2">
-                <Link href="/cv">CURRICULUM VITAE</Link>
-                <Link href="/projects">PROJECTS</Link>
-                <Link href="/blog">BLOG</Link>
-                <Link href="/about">ABOUT</Link>
-                <Link href="/contact">CONTACT</Link>
+                <Link href="/cv">{t("nav.cv")}</Link>
+                <Link href="/projects">{t("nav.projects")}</Link>
+                <Link href="/blog">{t("nav.blog")}</Link>
+                <Link href="/about">{t("nav.about")}</Link>
+                <Link href="/contact">{t("nav.contact")}</Link>
             </div>
         }
 

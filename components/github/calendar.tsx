@@ -1,6 +1,7 @@
 "use client"
 import { useEffect, useRef, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { useAppTranslation } from "../lang/useAppTranslation"
 
 interface Contribution {
   date: string
@@ -15,6 +16,7 @@ interface ContributionAsciiProps {
   shrink?: boolean
 }
 export default function ContributionAscii({ shrink }: ContributionAsciiProps) {
+  const {t} = useAppTranslation()
   const [data, setData] = useState<ApiResponse | null>(null)
   const [year, setYear] = useState<number | null>(null)
   const [open, setOpen] = useState(false)
@@ -51,7 +53,7 @@ if(data)
     <div className="flex flex-col gap-1">
       <div className="flex items-center gap-4 pt-4 text-sm relative">
         {data?.total && 
-        <span>Total contributions: {data.total}</span>
+        <span>{t("github.total")}: {data.total}</span>
         }
         <div className="relative inline-flex items-center">
           <button
@@ -61,7 +63,7 @@ if(data)
             aria-expanded={open}
             aria-haspopup="true"
           >
-            {year === null ? "Current" : year}
+            {year === null ? t("github.current") : year}
             <span className="select-none">ˇ</span>
           </button>
           <AnimatePresence>

@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react"
 import ContributionAscii from "./calendar"
 import Image from "next/image"
+import { useAppTranslation } from "../lang/useAppTranslation"
 
 interface Repo {
   name: string
@@ -26,6 +27,7 @@ interface GitHubUser {
 }
 
 export default function GitHubProfile({ onLoad }: { onLoad?: () => void }) {
+  const {t} = useAppTranslation()
   const [data, setData] = useState<GitHubUser | null>(null)
   const [loading, setLoading] = useState(true)
   const [phone, setPhone] = useState(false)
@@ -81,7 +83,7 @@ export default function GitHubProfile({ onLoad }: { onLoad?: () => void }) {
           }
           {data?.followers &&
           <p className="text-sm text-zinc-500">
-            Followers: {data.followers} | Following: {data.following} | Stars: {data.totalStars}
+            {t("github.followers")}: {data.followers} | {t("github.following")}: {data.following} | {t("github.stars")}: {data.totalStars}
           </p>
           }
         </div>
@@ -98,7 +100,7 @@ export default function GitHubProfile({ onLoad }: { onLoad?: () => void }) {
 >
           {data?.repos && 
           <>
-        <h3 className="font-semibold">Recent Repos:</h3>
+        <h3 className="font-semibold">{t("github.recent")}:</h3>
         <ul className={`mt-2 space-2 gap-2 grid w-full pb-4 ${phone ? "grid-cols-1" : "grid-cols-2"}`}>
           {data.repos.map(repo => (
             <li key={repo.name} className="p-2 border rounded hover:bg-zinc-900 w-full">

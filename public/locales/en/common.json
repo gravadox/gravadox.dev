@@ -2,5 +2,35 @@
     "common":{
         "lang": "EN",
         "language": "english"
+    },
+    "nav":{
+        "cv": "CURRICULUM VITAE",
+        "projects": "PROJECTS",
+        "blog": "BLOG",
+        "about": "ABOUT",
+        "contact": "CONTACT",
+        "sideBar":{
+            "posts": "posts",
+            "projects": "projects"
+        }
+    }
+    ,
+    "hero":{
+    "Title": "WELCOME, I'M GRAHAM",
+    "description":"Software & web developer,\nThis is where I share my projects & experiments.\nfind more about me in the ABOUT page"
+    },
+    "github":{
+        "followers": "Followers",
+        "following": "Following",
+        "stars": "Stars",
+        "recent": "Recent Repos:",
+        "total": "Total Contributions",
+        "current": "current"
+    },
+    "contact": {
+        "contact": "Contact",
+        "message": "Message",
+        "send": "send",
+        "socials": "Socials"
     }
 }

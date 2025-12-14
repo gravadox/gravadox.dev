@@ -5,8 +5,10 @@ import { useState } from "react"
 import Nav from "../nav"
 import { Button } from "@/components/ui/button"
 import { sendMail } from "@/actions/contact"
+import { useAppTranslation } from "@/components/lang/useAppTranslation"
 
 export default function ContactPage() {
+  const {t} = useAppTranslation()
   const [email, setEmail] = useState("")
   const [message, setMessage] = useState("")
   const [statusMessage, setStatusMessage] = useState<string | null>(null)
@@ -36,7 +38,7 @@ export default function ContactPage() {
     <div>
       <Nav />
       <div className="mx-auto max-w-xl px-6 py-16 space-y-6">
-        <h1 className="text-3xl font-bold">Contact</h1>
+        <h1 className="text-3xl font-bold">{t("contact.contact")}</h1>
 
         {/* Contact Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -52,7 +54,7 @@ export default function ContactPage() {
           <textarea
             required
             name="message"
-            placeholder="Message"
+            placeholder={t("contact.message")}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             className="w-full min-h-[120px] border px-4 py-2"
@@ -64,7 +66,7 @@ export default function ContactPage() {
             className="bg-black px-6 text-white text-left flex justify-start p-0 hover:underline disabled:opacity-50"
             disabled={loading}
           >
-            {loading ? "Sending..." : "Send"}
+            {loading ? t("contact.send")+"..." : t("contact.send")}
           </Button>
         </form>
 
@@ -86,7 +88,7 @@ export default function ContactPage() {
 
         {/* Social Links */}
         <div className="space-y-2">
-          <p className="font-medium">Socials</p>
+          <p className="font-medium">{t("contact.socials")}</p>
           <ul className="space-y-1 text-zinc-600">
             <li><Link className="hover:underline" href="https://github.com/gravadox">GitHub</Link></li>
             <li><Link className="hover:underline" href="https://instagram.com/gravadoxx">Instagram</Link></li>
