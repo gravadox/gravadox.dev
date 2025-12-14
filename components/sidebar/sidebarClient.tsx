@@ -101,7 +101,9 @@ export function SideBarClient({
                   <CollapsibleTrigger className="flex items-center cursor-pointer w-full justify-between">
                     <div className="items-center flex gap-2 text-lg">
                       <cat.icon className="w-4 h-4" />
+                      <Link href={cat.path} className="hover:underline">
                       {cat.title}
+                      </Link>
                     </div>
                       {open[cat.title] ? (
                         <ChevronDown className="h-4 transition-transform duration-200 rotate-0" />

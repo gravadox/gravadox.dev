@@ -25,6 +25,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// Blogs && Apps
 
 model App {
   id          String      @id @default(cuid())
@@ -92,4 +93,52 @@ enum BlockType {
   EMBED
   BUTTON
   CANVAS
+}
+
+// Curriculum vitae
+
+model CV {
+  id       String  @id @default(cuid())
+  name     String
+  description String?
+  photo    String?
+  location String?
+  phone    String?
+  email    String?
+  xp       XP[]
+  skills   Skills[]
+  extra    Json?
+}
+
+model XP {
+  id      String @id @default(cuid())
+  work    String
+  at      String?
+  date    String?
+  url     String?
+  cvId    String
+  cv      CV     @relation(fields: [cvId], references: [id], onDelete: Cascade)
+}
+
+model Skills {
+  id      String @id @default(cuid())
+  name    String
+  level   SkillLevels?
+  cvId    String
+  cv      CV     @relation(fields: [cvId], references: [id], onDelete: Cascade)
+}
+
+enum SkillLevels {
+  EXPERT
+  ADVANCED
+  PROFICIENT
+  INTERMEDIATE
+  BEGINNER
+}
+
+
+model Ip{
+  id  String @id @default(cuid())
+  ip  String @unique
+  lastUpdate DateTime
 }

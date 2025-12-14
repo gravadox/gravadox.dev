@@ -7,7 +7,7 @@ export default function Hero() {
   const links = ["Github", "Discord", "Youtube", "X", "Instagram"];
   const hrefs = [
     "https://github.com/gravadox",
-    "https://discord.com",
+    "https://discord.gg/fvtjNmE3Uw",
     "https://youtube.com/@gravadox",
     "https://x.com/gravadox",
     "https://instagram.com/gravadoxx",
