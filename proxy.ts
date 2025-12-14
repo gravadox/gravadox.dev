@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   const isLoginPage = req.nextUrl.pathname.startsWith("/admin/login")
   const cookie = req.cookies.get("admin")?.value
 
