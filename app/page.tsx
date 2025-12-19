@@ -41,7 +41,7 @@ export default function Home() {
 
       <Nav />
 
-      <div className={`${flex ? "flex" : "block"} p-6 justify-between h-screen pt-40`}>
+      <div className={`p-6 justify-between h-screen pt-40 ${flex ? "flex" : "block !pt-10"} `}>
         {loaded && domReady && <Hero />}
         {blackHole}
       </div>

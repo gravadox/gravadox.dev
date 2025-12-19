@@ -4,7 +4,7 @@ import nodemailer from "nodemailer"
 import { headers } from "next/headers"
 import { db } from "@/lib/db"
 
-const COOLDOWN_MS = 10 * 60 * 1000 // 10 minutes
+const COOLDOWN_MS = 60 * 1000 // 10 minutes
 
 export async function sendMail(formData: FormData) {
   const email = formData.get("email") as string
@@ -47,9 +47,9 @@ export async function sendMail(formData: FormData) {
     from: `"Contact Form" <${process.env.SMTP_USER}>`,
     to: "contact@gravadox.dev",
     replyTo: email,
-    subject: "New Contact Message",
+    subject: "Contact Email",
     text: message,
   })
 
-  return { success: true, message: "Message sent successfully!" }
+  return { success: true, message: "Email sent successfully!" }
 }

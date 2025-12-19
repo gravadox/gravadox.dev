@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Typer from "@/components/typing/typer";
 import Link from "next/link";
 import Nav from "../nav";
+import { useAppTranslation } from "@/components/lang/useAppTranslation";
 
 export default function Hero() {
   const links = ["Github", "Discord", "Youtube", "X", "Instagram"];
@@ -13,8 +14,9 @@ export default function Hero() {
     "https://x.com/gravadox",
     "https://instagram.com/gravadoxx",
   ];
-
-  const [text] = useState(process.env.NEXT_PUBLIC_ABOUT);
+  const {t} = useAppTranslation()
+  const lang = t("common.lang")
+  const [text] = useState(lang === "EN"? process.env.NEXT_PUBLIC_ABOUT_EN: process.env.NEXT_PUBLIC_ABOUT_DE);
   const [step, setStep] = useState(0);
   const [activeIndex, setActiveIndex] = useState(-1);
   const [margin, setMargin] = useState(false);

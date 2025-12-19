@@ -106,6 +106,7 @@ model CV {
   phone    String?
   email    String?
   xp       XP[]
+  lang     String
   skills   Skills[]
   extra    Json?
 }

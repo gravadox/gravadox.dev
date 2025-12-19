@@ -17,7 +17,7 @@ export default function Nav(){
       }, []);
     return(
         <div className="w-full bg-black p-2">
-        <div className="w-full flex items-center justify-between p-4">
+        <div className="w-full flex items-center justify-between px-2 py-4">
             {!drown && 
             <div className="w-full flex items-center gap-6 justify-start">
                 <Link href="/cv">{t("nav.cv")}</Link>

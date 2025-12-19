@@ -31,5 +31,17 @@
         "message": "Nachricht",
         "send": "Senden",
         "socials": "Soziale Netzwerke"
+    },
+    "cv": {
+      "xp": "BERUFSERFAHRUNG",
+      "skills": "FÄHIGKEITEN",
+      "levels": {
+          "expert": "EXPERTE",
+          "advanced": "FORTGESCHRITTEN",
+          "proficient": "SEHR GUT",
+          "intermediate": "MITTELSTUFE",
+          "beginner": "ANFÄNGER"
+      },
+      "req": "Vollständigen Lebenslauf anfordern"
     }
 }

@@ -16,7 +16,7 @@
     }
     ,
     "hero":{
-    "Title": "WELCOME, I'M GRAHAM",
+    "title": "WELCOME, I'M GRAHAM",
     "description":"Software & web developer,\nThis is where I share my projects & experiments.\nfind more about me in the ABOUT page"
     },
     "github":{
@@ -32,5 +32,17 @@
         "message": "Message",
         "send": "send",
         "socials": "Socials"
+    },
+    "cv":{
+        "xp": "WORK EXPERIENCE",
+        "skills": "SKILLS",
+        "levels":{
+            "expert": "EXPERT",
+            "advanced": "ADVANCED",
+            "proficient": "PROFICIENT",
+            "intermediate": "INTERMEDIATE",
+            "beginner": "BEGINNER"
+        },
+      "req": "Request Full CV"
     }
 }

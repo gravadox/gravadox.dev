@@ -33,6 +33,7 @@ type CVInput = {
   phone: string
   email: string
   xp: XPInput[]
+  lang: "EN" | "DE"
   skills: SkillInput[]
   extra: Prisma.InputJsonValue
 }
@@ -40,7 +41,7 @@ type CVInput = {
 export async function saveCV(raw:string) {
 
   const cv: CVInput = JSON.parse(raw)
-  const existing = await getCv()
+  const existing = await getCv(cv.lang)
 
   if (existing) {
     await db.cV.update({
@@ -81,6 +82,7 @@ export async function saveCV(raw:string) {
         phone: cv.phone || null,
         email: cv.email || null,
         extra: cv.extra,
+        lang: cv.lang,
         xp: {
           create: cv.xp.map((x) => ({
             work: x.work,
@@ -100,6 +102,6 @@ export async function saveCV(raw:string) {
   }
 }
 
-export async function getCv() {
-  return await db.cV.findFirst({include: {skills: true, xp: true}})
+export async function getCv(lang: "EN"|"DE") {
+  return await db.cV.findFirst({ where: {lang} ,include: {skills: true, xp: true}})
 }

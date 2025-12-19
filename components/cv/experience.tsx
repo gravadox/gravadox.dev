@@ -1,10 +1,19 @@
-import { XPInput } from "@/app/admin/cv/page"
+import { XPInput } from "./cvEditor" 
 
 interface Props {
-  data: XPInput[]
+    id: string;
+    work: string;
+    at: string | null;
+    url: string | null;
+    date: string | null;
+
 }
 
-export default function ExperienceTimeline({ data }: Props) {
+interface Data{
+  data: Props[]
+}
+
+export default function ExperienceTimeline({ data }: Data) {
   if (!data.length) return null
 
   return (
