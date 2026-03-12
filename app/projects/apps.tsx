@@ -37,7 +37,7 @@ export function Apps({data}:{data:Data[]}){
               <div className="p-2">
                 <div className="flex items-center">
               {app.icon && (
-                <Link href={`/projects/${app.slug}`}>
+                <Link className="w-13 h-13 flex items-center justify-center overflow-hidden" href={`/projects/${app.slug}`}>
                 <Image height={100} width={100} alt="icon" className="w-13" src={app.icon} />
                 </Link>
               )}

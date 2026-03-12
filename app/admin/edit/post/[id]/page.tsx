@@ -1,5 +1,6 @@
 import EditPost from "./editPost";
 
-export default function Page({ params }: { params: { id: string } }) {
-  return <EditPost postId={params.id} />
+export default async function Page({ params }: { params: { id: string } }) {
+  const {id} = await params
+  return <EditPost postId={id} />
 }

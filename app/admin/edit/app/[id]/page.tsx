@@ -1,5 +1,6 @@
 import EditApp from "./editApp";
 
-export default function Page({ params }: { params: { id: string } }) {
-  return <EditApp appId={params.id}  />
+export default async function Page({ params }: { params: { id: string } }) {
+  const {id} = await params
+  return <EditApp appId={id}  />
 }
