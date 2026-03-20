@@ -43,7 +43,7 @@ export default function BlackHole({ onLoad }: { onLoad?: () => void }) {
     // Spline scene loader
     const loader = new SplineLoader()
     loader.load(
-      "https://prod.spline.design/xE6dwSws8Z1Qv5g5/scene.splinecode",
+      "/scene.splinecode",
       (splineScene) => {
         splineObject = splineScene
         scene.add(splineScene)

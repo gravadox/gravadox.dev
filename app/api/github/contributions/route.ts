@@ -1,3 +1,4 @@
+export const revalidate = 500 // secs
 import { NextResponse } from "next/server"
 
 interface ContributionDay {
@@ -64,6 +65,7 @@ export async function GET(req: Request) {
       "Authorization": `Bearer ${token}`,
     },
     body: JSON.stringify({ query }),
+    next: { revalidate: 500 },
   })
 
   const data: { data?: UserData; errors?: GraphQLError[] } = await r.json()

@@ -75,7 +75,7 @@ function isCvExtraField(obj: unknown): obj is CvExtraField {
 export default function Cv() {
   const { t } = useAppTranslation()
   const lang = t("common.lang")
-
+  const router = useRouter()
   const [cv, setCv] = useState<CvData | null>(null)
   const [loaded, setLoaded] = useState(false)
 
@@ -92,7 +92,7 @@ export default function Cv() {
     }
   }, [lang])
 
-  if (loaded && !cv) return useRouter().push('/404')
+  if (loaded && !cv) { router.push('/404'); return }
   if (!cv) return null
 
   const nonEmptyXP: CvXP[] = (cv.xp || []).map((xp) => ({

@@ -4,7 +4,7 @@ import nodemailer from "nodemailer"
 import { headers } from "next/headers"
 import { db } from "@/lib/db"
 
-const COOLDOWN_MS = 60 * 1000 // 10 minutes
+const COOLDOWN_MS = 60 * 10000 // 10 MINUUTTEESSS
 
 export async function sendMail(formData: FormData) {
   const email = formData.get("email") as string
@@ -14,10 +14,14 @@ export async function sendMail(formData: FormData) {
 
   const h = await headers()
   const ip =
-    h.get("x-vercel-forwarded-for")?.split(",")[0]?.trim() ??
+    h.get("x-vercel-forwarded-for")?.split(",").at(-1)?.trim() ??
     h.get("x-real-ip") ??
     "unknown"
 
+  if (ip === "unknown") {
+    return { success: false, message: "Could not verify request origin." }
+  }
+  
   const now = new Date()
   const record = await db.ip.findUnique({ where: { ip } })
 

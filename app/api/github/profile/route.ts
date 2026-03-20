@@ -1,3 +1,4 @@
+export const revalidate = 500 // secs
 import { NextResponse } from "next/server"
 
 interface Repo {
@@ -56,11 +57,11 @@ export async function GET() {
   const token = process.env.GITHUB_TOKEN
   if (!token) return NextResponse.json({ error: "GITHUB_TOKEN not set" }, { status: 500 })
 
-  const userRes = await fetch(`https://api.github.com/users/${username}`)
+  const userRes = await fetch(`https://api.github.com/users/${username}`, {next: {revalidate: 500}})
   if (!userRes.ok) return NextResponse.json({ error: "User not found" }, { status: 404 })
   const user: User = await userRes.json()
 
-  const reposRes = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=6`)
+  const reposRes = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=6`, {next: {revalidate:500}})
   const reposData: RestRepo[] = await reposRes.json()
 
   const graphqlQuery = `
@@ -93,6 +94,7 @@ export async function GET() {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ query: graphqlQuery }),
+    next: {revalidate: 500}
   })
 
   const graphqlData: GraphQLResponse = await graphqlRes.json()
