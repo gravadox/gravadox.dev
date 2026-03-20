@@ -1,4 +1,3 @@
-// components/blog/canvas/canvas.tsx
 "use client"
 import { useRef, useEffect } from "react"
 
@@ -11,15 +10,16 @@ interface Props {
 
 export default function CanvasRunner({ code, mode = "2d", width = 768, height = 400 }: Props) {
   const iframeRef = useRef<HTMLIFrameElement>(null)
+  const blobUrlRef = useRef<string | null>(null)
 
   useEffect(() => {
-    const doc = iframeRef.current?.contentDocument
-    if (!doc) return
+    const iframe = iframeRef.current
+    if (!iframe) return
 
     const html = `<!DOCTYPE html>
 <html>
 <head>
-<style>*{margin:0;padding:0;background:#09090b;}</style>
+<style>*{margin:0;padding:0;background:#09090b;} body{overflow:hidden;}</style>
 </head>
 <body>
 <canvas id="c" width="${width}" height="${height}" style="width:100%;height:auto;"></canvas>
@@ -34,9 +34,23 @@ export default function CanvasRunner({ code, mode = "2d", width = 768, height = 
 </body>
 </html>`
 
-    doc.open()
-    doc.write(html)
-    doc.close()
+    // Revoke previous blob URL to avoid memory leaks
+    if (blobUrlRef.current) {
+      URL.revokeObjectURL(blobUrlRef.current)
+    }
+
+    const blob = new Blob([html], { type: "text/html" })
+    const url = URL.createObjectURL(blob)
+    blobUrlRef.current = url
+    iframe.src = url
+
+    return () => {
+      // Cleanup on unmount
+      if (blobUrlRef.current) {
+        URL.revokeObjectURL(blobUrlRef.current)
+        blobUrlRef.current = null
+      }
+    }
   }, [code, mode, width, height])
 
   return (
@@ -46,6 +60,7 @@ export default function CanvasRunner({ code, mode = "2d", width = 768, height = 
         sandbox="allow-scripts"
         style={{ width: "100%", height: Number(height), border: "1px solid #27272a", display: "block" }}
         title="canvas"
+        className="overflow-hidden"
       />
     </div>
   )

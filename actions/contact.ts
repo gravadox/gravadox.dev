@@ -1,5 +1,5 @@
 "use server"
-
+import { ipAddress } from "@vercel/functions"
 import nodemailer from "nodemailer"
 import { headers } from "next/headers"
 import { db } from "@/lib/db"
@@ -13,12 +13,9 @@ export async function sendMail(formData: FormData) {
   if (!email || !message || message.length > 7000) return { success: false, message: "Invalid data" }
 
   const h = await headers()
-  const ip =
-    h.get("x-vercel-forwarded-for")?.split(",").at(-1)?.trim() ??
-    h.get("x-real-ip") ??
-    "unknown"
+  const ip = ipAddress({ headers: h }) ?? "unknown"
 
-  if (ip === "unknown") {
+  if ((ip === "unknown") && process.env.NODE_ENV !== "development") {
     return { success: false, message: "Could not verify request origin." }
   }
   
@@ -36,6 +33,9 @@ export async function sendMail(formData: FormData) {
     await db.ip.create({ data: { ip, lastUpdate: now } })
   }
 
+  if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !process.env.SMTP_PASS) {
+    return { success: false, message: "Service temporarily unavailable." }
+  }
   // Send email
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,

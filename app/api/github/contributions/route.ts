@@ -33,7 +33,7 @@ export async function GET(req: Request) {
   const username = "gravadox"
 
   if (!token)
-    return NextResponse.json({ error: "Missing token" }, { status: 500 })
+    return NextResponse.json({ error: "Service unavailable" }, { status: 503 })
 
   const { searchParams } = new URL(req.url)
   const year = searchParams.get("year")

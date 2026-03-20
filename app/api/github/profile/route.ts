@@ -55,7 +55,7 @@ interface GraphQLResponse {
 export async function GET() {
   const username = "gravadox"
   const token = process.env.GITHUB_TOKEN
-  if (!token) return NextResponse.json({ error: "GITHUB_TOKEN not set" }, { status: 500 })
+  if (!token) return NextResponse.json({ error: "Service unavailable" }, { status: 503 })
 
   const userRes = await fetch(`https://api.github.com/users/${username}`, {next: {revalidate: 500}})
   if (!userRes.ok) return NextResponse.json({ error: "User not found" }, { status: 404 })

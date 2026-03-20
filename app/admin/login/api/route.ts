@@ -15,7 +15,6 @@ export async function POST(req: Request) {
   // logoin logic
   const key = (await req.text()).trim()
   const secret = process.env.ADMIN_SECRET?.trim()
-  const input = key.trim()
 
   if (!key || !secret) {
     return new NextResponse("Unauthorized", { status: 401 })

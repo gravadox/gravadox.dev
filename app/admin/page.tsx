@@ -4,7 +4,7 @@ import Link from "next/link"
 import DeletePostOrApp from "./delete"
 
 export default async function AdminPage() {
-  requireAdmin()
+  await requireAdmin()
 
   const posts = await db.post.findMany()
   const apps = await db.app.findMany()
