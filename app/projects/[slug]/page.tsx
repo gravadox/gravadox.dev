@@ -11,6 +11,11 @@ export default async function Layout({ params }: { params: { slug: string } }){
         include: { blocks: true, downloads: true },
       })
     if(!app) return notFound()
+
+    if (app.publishAt && app.publishAt > new Date()) {
+      return notFound()
+    }
+    
     return(
     <div className="flex">
       <SidebarProvider className="w-fit">

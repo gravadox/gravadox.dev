@@ -37,7 +37,7 @@ export default function ExperienceTimeline({ data }: Data) {
 
           {/* Content */}
           <div className="pb-6">
-            <a target="_blank" href={item.url || undefined} className={`font-medium text-zinc-300 ${item.url?"hover:underline": ""}`}>{item.work}</a>
+            <a target="_blank" rel="noopener noreferrer" href={item.url || undefined} className={`font-medium text-zinc-300 ${item.url?"hover:underline": ""}`}>{item.work}</a>
             <div className="italic text-zinc-500 text-sm">{item.at}</div>
           </div>
         </div>

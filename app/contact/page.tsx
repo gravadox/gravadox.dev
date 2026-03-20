@@ -34,6 +34,12 @@ export default function ContactPage() {
     }
   }
 
+  const handleMessageChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const val = e.target.value;
+  if (val.length <= 7000) {
+    setMessage(val);
+  }
+};
   return (
     <div>
       <Nav />
@@ -57,14 +63,15 @@ export default function ContactPage() {
             placeholder={t("contact.message")}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
+            maxLength={7000}
             className="w-full min-h-[120px] border px-4 py-2"
           />
-
+          {message.length} / 7000
           <Button
             type="submit"
             variant="transparent"
             className="bg-black px-6 text-white text-left flex justify-start p-0 hover:underline disabled:opacity-50"
-            disabled={loading}
+            disabled={loading || message.length > 7000 || message.length < 10}
           >
             {loading ? t("contact.send")+"..." : t("contact.send")}
           </Button>

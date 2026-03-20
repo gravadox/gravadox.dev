@@ -1,6 +1,6 @@
-// app/cv/new/actions.ts
 "use server"
 
+import { requireAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { Prisma } from "@prisma/client"
 
@@ -39,7 +39,7 @@ type CVInput = {
 }
 
 export async function saveCV(raw:string) {
-
+  await requireAdmin()
   const cv: CVInput = JSON.parse(raw)
   const existing = await getCv(cv.lang)
 

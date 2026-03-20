@@ -51,6 +51,7 @@ export default function DeletePostOrApp({ id, type }: DeletePostOrAppProps) {
   const [loading, setLoading] = useState(false)
 
   const handleDelete = async (id: string) => {
+    setLoading(true)
     try {
       if(type==="post")
       {
@@ -66,6 +67,7 @@ export default function DeletePostOrApp({ id, type }: DeletePostOrAppProps) {
       }
     } catch (err) {
       toast.error("Failed to delete")
+      setLoading(false)
       console.error(err)
     }
     }

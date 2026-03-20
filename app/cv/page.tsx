@@ -6,7 +6,7 @@ import { RequestFullCv } from "@/components/cv/request"
 import ExperienceTimeline from "@/components/cv/experience"
 import { Separator } from "@/components/ui/separator"
 import { Home, Mail, Phone } from "@/icons"
-import { notFound } from "next/navigation"
+import { notFound, useRouter } from "next/navigation"
 import Nav from "../nav"
 import { useAppTranslation } from "@/components/lang/useAppTranslation"
 import { JsonValue } from "@prisma/client/runtime/library"
@@ -92,7 +92,7 @@ export default function Cv() {
     }
   }, [lang])
 
-  if (loaded && !cv) return notFound()
+  if (loaded && !cv) return useRouter().push('/404')
   if (!cv) return null
 
   const nonEmptyXP: CvXP[] = (cv.xp || []).map((xp) => ({
@@ -232,6 +232,7 @@ export default function Cv() {
                   >
                     <a
                       target="_blank"
+                      rel="noopener noreferrer"
                       href={f.url || undefined}
                       className={`w-1/2 text-xl ${
                         f.url ? "hover:underline" : ""

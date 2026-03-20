@@ -10,11 +10,11 @@ export async function sendMail(formData: FormData) {
   const email = formData.get("email") as string
   const message = formData.get("message") as string
 
-  if (!email || !message) return { success: false, message: "Invalid data" }
+  if (!email || !message || message.length > 7000) return { success: false, message: "Invalid data" }
 
   const h = await headers()
   const ip =
-    h.get("x-forwarded-for")?.split(",")[0]?.trim() ??
+    h.get("x-vercel-forwarded-for")?.split(",")[0]?.trim() ??
     h.get("x-real-ip") ??
     "unknown"
 
