@@ -35,6 +35,12 @@ export default function MarkdownText({ text }: MarkdownTextProps) {
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw]}
         components={{
+          // Block dangerous raw-HTML elements that should never appear in post content
+          script: () => null,
+          iframe: () => null,
+          object: () => null,
+          embed: () => null,
+          form: () => null,
           // Links
           a: ({ node, ...props }) => (
             <a

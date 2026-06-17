@@ -10,7 +10,8 @@ export async function sendMail(formData: FormData) {
   const email = formData.get("email") as string
   const message = formData.get("message") as string
 
-  if (!email || !message || message.length > 7000) return { success: false, message: "Invalid data" }
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
+  if (!email || !emailRegex.test(email) || !message || message.length > 7000) return { success: false, message: "Invalid data" }
 
   const h = await headers()
   const ip = ipAddress({ headers: h }) ?? "unknown"

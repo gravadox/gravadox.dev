@@ -36,7 +36,8 @@ export async function GET(req: Request) {
     return NextResponse.json({ error: "Service unavailable" }, { status: 503 })
 
   const { searchParams } = new URL(req.url)
-  const year = searchParams.get("year")
+  const rawYear = searchParams.get("year")
+  const year = rawYear && /^\d{4}$/.test(rawYear) ? rawYear : null
 
   const dateFilter = year
     ? `(from: "${year}-01-01T00:00:00Z", to: "${year}-12-31T23:59:59Z")`
@@ -70,8 +71,10 @@ export async function GET(req: Request) {
 
   const data: { data?: UserData; errors?: GraphQLError[] } = await r.json()
 
-  if (!data?.data?.user)
-    return NextResponse.json({ error: "Invalid response", raw: data }, { status: 500 })
+  if (!data?.data?.user) {
+    console.error("GitHub API unexpected response:", JSON.stringify(data))
+    return NextResponse.json({ error: "Service unavailable" }, { status: 500 })
+  }
 
   const days = data.data.user.contributionsCollection.contributionCalendar.weeks
     .flatMap((w: Week) => w.contributionDays)
@@ -79,9 +82,7 @@ export async function GET(req: Request) {
   const calendar = days.map((d: ContributionDay) => ({
     date: d.date,
     count: d.contributionCount,
-    symbol:
-      d.contributionCount === 0 ? "*" :
-      d.contributionCount < 5 ? "#" : "▮",
+    symbol: d.contributionCount < 5 ? "*" : "#",
   }))
 
   const total = days.reduce((sum, d) => sum + d.contributionCount, 0)

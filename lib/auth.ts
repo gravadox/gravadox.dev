@@ -3,7 +3,11 @@
 import { cookies } from "next/headers"
 import { SignJWT, jwtVerify } from "jose"
 
-const secret = new TextEncoder().encode(process.env.SESSION_SECRET)
+const rawSecret = process.env.SESSION_SECRET
+if (!rawSecret || rawSecret.length < 16) {
+  throw new Error("SESSION_SECRET env var must be set and at least 16 characters long")
+}
+const secret = new TextEncoder().encode(rawSecret)
 
 export async function createSession() {
   return await new SignJWT({ admin: true })

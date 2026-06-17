@@ -25,16 +25,24 @@ export default function ContributionAscii({ shrink }: ContributionAsciiProps) {
   const calenderRef = useRef<HTMLDivElement>(null)
   const btnRef = useRef<HTMLButtonElement | null>(null)
   const [optionsWidth, setOptionsWidth] = useState(0)
+
   const fetchData = (y?: number) => {
     const url = y ? `/api/github/contributions?year=${y}` : `/api/github/contributions`
     fetch(url)
       .then(r => r.json())
-      .then(json => setData(json?.calendar ? json : null))
+      .then(json => {
+        if (json?.calendar) {
+          setData(json)
+        } else {
+          setData(null)
+        }
+      })
       .catch(() => setData(null))
   }
 
-  useEffect(() => { fetchData() }, [])
-  useEffect(() => { if (year !== null) fetchData(year) }, [year])
+  // Single effect handles initial load AND switching back to current year (year → null)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => { fetchData(year ?? undefined) }, [year])
   useEffect(() => {
     if (!calenderRef.current || !data) return
     requestAnimationFrame(() => {
@@ -52,8 +60,9 @@ if(data)
   return (
     <div className="flex flex-col gap-1">
       <div className="flex items-center gap-4 pt-4 text-sm relative">
-        {data?.total && 
-        <span>{t("github.total")}: {data.total}</span>
+        {year === null
+          ? <span>{t("github.total")}: {data.total}</span>
+          : <span>{year}: {data.total}</span>
         }
         <div className="relative inline-flex items-center">
           <button
@@ -116,11 +125,17 @@ if(data)
           onTouchEnd={() => setTimeout(() => setActiveCell(null), 5000)}
         >
           <div
-            className={`w-full h-full flex items-center justify-center rounded transition-colors duration-150 
-              ${activeCell === i ? "bg-zinc-800" : "bg-transparent"} 
+            className={`w-full h-full flex items-center justify-center rounded transition-colors duration-150
+              ${activeCell === i ? "bg-zinc-800" : "bg-transparent"}
               group-hover:bg-zinc-800`}
           >
-            {d.symbol}
+            <span className={
+              d.count === 0 ? "text-white/50" :
+              d.count < 5 ? "text-white/[0.87]" :
+              "text-white"
+            }>
+              {d.count < 5 ? "*" : "#"}
+            </span>
           </div>
           <div
             className={`absolute top-full mb-1 left-1/2 -translate-x-1/2 px-2 py-1 text-xs rounded bg-zinc-800 text-white z-10 

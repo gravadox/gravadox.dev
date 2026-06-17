@@ -4,6 +4,24 @@ import { requireAdmin } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { Prisma } from "@prisma/client"
 
+export type CVExtraItem = { key: string; value: string }
+export type CVExtra = { title: string; items: CVExtraItem[] }
+
+function isValidExtra(v: unknown): v is CVExtra | null {
+  if (v === null || v === undefined) return true
+  if (typeof v !== "object" || Array.isArray(v)) return false
+  const e = v as Record<string, unknown>
+  if (typeof e.title !== "string") return false
+  if (!Array.isArray(e.items)) return false
+  return e.items.every(
+    item =>
+      typeof item === "object" &&
+      item !== null &&
+      typeof (item as Record<string, unknown>).key === "string" &&
+      typeof (item as Record<string, unknown>).value === "string"
+  )
+}
+
 type SkillLevels =
   | "BEGINNER"
   | "INTERMEDIATE"
@@ -41,6 +59,9 @@ type CVInput = {
 export async function saveCV(raw:string) {
   await requireAdmin()
   const cv: CVInput = JSON.parse(raw)
+  if (!isValidExtra(cv.extra)) {
+    throw new Error("Invalid extra format: must be { title: string, items: { key, value }[] }")
+  }
   const existing = await getCv(cv.lang)
 
   if (existing) {

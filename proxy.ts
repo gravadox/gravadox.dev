@@ -9,7 +9,11 @@ export function proxy(req: NextRequest) {
     return NextResponse.redirect(new URL("/admin/login", req.url))
   }
 
-  return NextResponse.next()
+  // Forward the real pathname to server components (used by admin layout for auth guard)
+  const requestHeaders = new Headers(req.headers)
+  requestHeaders.set("x-pathname", req.nextUrl.pathname)
+
+  return NextResponse.next({ request: { headers: requestHeaders } })
 }
 
 export const config = {
