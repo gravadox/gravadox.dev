@@ -18,9 +18,9 @@ export default async function AdminPage() {
       {/* Posts */}
       <section>
         <h2 className="text-xl font-semibold mb-4">Posts</h2>
-        <div className="flex flex-wrap gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {posts.map(post => (
-            <div key={post.id} className="border p-4 flex flex-col justify-between hover:shadow transition w-1/4">
+            <div key={post.id} className="border p-4 flex flex-col justify-between hover:shadow transition">
               <Link href={`/blog/${post.slug}`} className="block">
                 <h3 className="font-semibold text-lg">{post.title}</h3>
                 {post.description && <p className="text-zinc-600 w-full truncate mt-1">{post.description}</p>}
@@ -37,9 +37,9 @@ export default async function AdminPage() {
       {/* Apps */}
       <section>
         <h2 className="text-xl font-semibold mb-4">Projects</h2>
-        <div className="flex flex-wrap gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {apps.map(app => (
-            <div key={app.id} className="border  p-4 flex flex-col justify-between hover:shadow transition w-1/4">
+            <div key={app.id} className="border p-4 flex flex-col justify-between hover:shadow transition">
               <Link href={`/projects/${app.slug}`} className="block">
                 <h3 className="font-semibold text-lg">{app.title}</h3>
                 {app.description && <p className="text-zinc-600 w-full truncate mt-1">{app.description}</p>}

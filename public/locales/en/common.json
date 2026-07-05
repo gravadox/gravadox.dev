@@ -4,7 +4,6 @@
         "language": "english"
     },
     "nav":{
-        "cv": "CURRICULUM VITAE",
         "projects": "PROJECTS",
         "blog": "BLOG",
         "about": "ABOUT",
@@ -13,8 +12,7 @@
             "posts": "posts",
             "projects": "projects"
         }
-    }
-    ,
+    },
     "hero":{
     "title": "WELCOME, I'M GRAHAM",
     "description":"Software & web developer,\nThis is where I share my projects & experiments.\nfind more about me in the ABOUT page"
@@ -32,17 +30,5 @@
         "message": "Message",
         "send": "send",
         "socials": "Socials"
-    },
-    "cv":{
-        "xp": "WORK EXPERIENCE",
-        "skills": "SKILLS",
-        "levels":{
-            "expert": "EXPERT",
-            "advanced": "ADVANCED",
-            "proficient": "PROFICIENT",
-            "intermediate": "INTERMEDIATE",
-            "beginner": "BEGINNER"
-        },
-      "req": "Request Full CV"
     }
 }

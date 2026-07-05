@@ -20,7 +20,6 @@ export default function Nav(){
         <div className="w-full flex items-center justify-between px-2 py-4">
             {!drown && 
             <div className="w-full flex items-center gap-6 justify-start">
-                <Link href="/cv">{t("nav.cv")}</Link>
                 <Link href="/projects">{t("nav.projects")}</Link>
                 <Link href="/blog">{t("nav.blog")}</Link>
                 <Link href="/about">{t("nav.about")}</Link>
@@ -33,7 +32,6 @@ export default function Nav(){
         </div>
                 {drown && 
             <div className="w-full flex items-center gap-6 justify-between px-2">
-                <Link href="/cv">{t("nav.cv")}</Link>
                 <Link href="/projects">{t("nav.projects")}</Link>
                 <Link href="/blog">{t("nav.blog")}</Link>
                 <Link href="/about">{t("nav.about")}</Link>
