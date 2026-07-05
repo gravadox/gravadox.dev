@@ -1,0 +1,27 @@
+# Gravadox
+
+> Personal portfolio and blog by Gravadox — software and web developer. Full-stack development, desktop applications, open-source projects, and technical writing.
+
+## Site
+
+- [Home](https://gravadox.dev): Landing page with intro and GitHub contribution graph.
+- [Blog](https://gravadox.dev/blog): Technical articles and writing.
+- [Projects](https://gravadox.dev/projects): Software projects and applications.
+- [About](https://gravadox.dev/about): Background and information about Gravadox.
+- [Contact](https://gravadox.dev/contact): Contact form and social links.
+
+## Socials
+
+- [GitHub](https://github.com/gravadox)
+- [YouTube](https://youtube.com/@gravadox)
+- [X / Twitter](https://x.com/gravadox)
+- [Instagram](https://instagram.com/gravadoxx)
+- [Discord](https://discord.gg/fvtjNmE3Uw)
+
+## Contact
+
+Email: contact@gravadox.dev
+
+## Optional
+
+- [Sitemap](https://gravadox.dev/sitemap.xml)

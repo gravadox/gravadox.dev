@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# gravadox.dev
 
-## Getting Started
+Personal portfolio and blog — built with Next.js 15, React 19, TypeScript, Prisma, PostgreSQL, and Tailwind v4.
 
-First, run the development server:
+## Stack
+
+- **Framework:** Next.js 15 (App Router) with Turbopack
+- **UI:** React 19, Tailwind CSS v4, shadcn/ui, Framer Motion
+- **3D:** Three.js, Spline
+- **Database:** PostgreSQL via Prisma ORM
+- **Auth:** JWT sessions with `jose` (httpOnly cookie)
+- **i18n:** i18next — English (`en`) and German (`de`)
+- **Email:** Nodemailer (contact form)
+
+## Routes
+
+| Path | Description |
+|---|---|
+| `/` | Home — 3D black hole, GitHub profile, typed intro |
+| `/blog` | Blog post listing |
+| `/blog/[slug]` | Blog article (block-based renderer) |
+| `/projects` | Projects / apps listing |
+| `/projects/[slug]` | Project article (block-based renderer) |
+| `/about` | About page |
+| `/contact` | Contact form + social links |
+| `/admin` | Admin dashboard (protected) |
+
+## Development
+
+Copy the environment template and fill in values:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cp example.env .env
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+| Variable | Purpose |
+|---|---|
+| `DATABASE_URL` | PostgreSQL connection string |
+| `ADMIN_SECRET` | Password for `/admin` login |
+| `SESSION_SECRET` | Secret for signing JWT session tokens |
+| `GITHUB_TOKEN` | GitHub personal access token (contributions graph) |
+| `NEXT_PUBLIC_ABOUT_EN` | English about/intro text |
+| `NEXT_PUBLIC_ABOUT_DE` | German about/intro text |
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Install and run:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm install       # also runs prisma generate via postinstall
+npm run dev       # dev server on http://localhost:3000
+```
 
-## Learn More
+**Prisma:**
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npx prisma migrate dev   # apply schema changes
+npx prisma studio        # browse DB in browser
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Other scripts:**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run build    # production build
+npm run lint     # ESLint
+```
 
-## Deploy on Vercel
+## Content Model
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Content is structured as `Post` (blog) or `App` (project) records, each containing an ordered array of `Block` records. Blocks are polymorphic — the `type` enum (`TEXT`, `IMAGE`, `VIDEO`, `CODE`, `EMBED`, `BUTTON`, `CANVAS`) determines how the `data: Json` field is interpreted.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Admin
+
+Protected by JWT cookie set at `/admin/login`. The `ADMIN_SECRET` env var is the password. All content creation and editing is done through the block editor at `/admin`.
+
+## License
+
+See [LICENSE](LICENSE).
