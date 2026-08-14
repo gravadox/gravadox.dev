@@ -17,7 +17,7 @@ export default function LanguageSwitcher() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <div>
+        <div className="hover:cursor-pointer">
           {currentLang}
         </div>
       </DropdownMenuTrigger>
