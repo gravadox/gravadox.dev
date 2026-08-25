@@ -5,6 +5,7 @@ import Loader from "@/components/loader/loader"
 import BlackHole from "@/components/3d/blackHole"
 import Hero from "./hero"
 import GitHubProfile from "@/components/github/profile"
+import Products from "@/components/products/products"
 
 export default function Home() {
   const [domReady, setDomReady] = useState(false)
@@ -47,6 +48,7 @@ export default function Home() {
       </div>
 
       {githubProfile}
+      <Products />
     </div>
   )
 }

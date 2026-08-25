@@ -1,4 +1,4 @@
-/*/ Loader mimic /*/
+/*/ All loaders are fake don't blame me now /*/
 "use client"
 
 import { useEffect, useState } from "react"

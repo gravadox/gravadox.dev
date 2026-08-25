@@ -6,6 +6,7 @@
     "nav":{
         "projects": "PROJECTS",
         "blog": "BLOG",
+        "products": "PRODUCTS",
         "about": "ABOUT",
         "contact": "CONTACT",
         "sideBar":{
