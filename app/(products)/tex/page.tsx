@@ -61,7 +61,7 @@ export default function Page() {
         </p>
         <div className="hero-actions">
           <Link className="button primary" href="tex/download">Download for Desktop</Link>
-          <Link className="button" href="https://github.com" target="_blank" rel="noreferrer">GitHub Repository</Link>
+          <Link className="button" href="https://github.com/gravadox/tex" target="_blank" rel="noreferrer">GitHub Repository</Link>
         </div>
         <HeroNotepad />
         <p className="availability">Available on Windows and Linux.</p>

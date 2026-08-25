@@ -57,7 +57,7 @@ export function HeroNotepad() {
   }
 
   return (
-    <div className={`notepad" aria-label="Interactive TEx abbreviation notepad border-2 ${focused? "border-zinc-700": "border-zinc-800"}`}>
+    <div className={`notepad" aria-label="Interactive TEx abbreviation notepad border-2 ${focused? "border-neutral-800": "border-neutral-900"}`}>
       <div className="notepad-bar">
         <span className="dot red" />
         <span className="dot amber" />
