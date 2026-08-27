@@ -1,7 +1,7 @@
 import Link from 'next/link'
-import { FeatureSections } from '../../../components/(products)/tex/components/FeatureSections'
-import { HeroNotepad } from '../../../components/(products)/tex/components/HeroNotepad'
-import TExLogo from '../../../components/(products)/tex/components/TExLogo'
+import { FeatureSections } from '../../../components/(products)/tex/FeatureSections'
+import { HeroNotepad } from '../../../components/(products)/tex/HeroNotepad'
+import TExLogo from '../../../components/(products)/tex/TExLogo'
 
 const benefits = [
   ['Fast Expansions', 'Expansions happen instantly as you type. TEx runs quietly in the system tray.',],

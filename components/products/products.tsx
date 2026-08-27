@@ -1,4 +1,6 @@
+"use client"
 import Link from "next/link";
+import { useAppTranslation } from "../lang/useAppTranslation";
 
 const PRODUCTS:Product[] = [
     {name: "TEx", description: "TEx is a keyboard abbreviation app to replace the copy & paste headaches. \n Define short triggers that expand into text, emojis, links, or passwords.", url: "/tex"},
@@ -10,6 +12,7 @@ export type Product = {
     description?: string;
 }
 export default function Products(){
+    const {t} = useAppTranslation()
     const handleMouseOver = (e:React.MouseEvent<HTMLDivElement, MouseEvent>)=>{
         console.log("fuck")
         const title = e.currentTarget.querySelector("p");
@@ -22,7 +25,7 @@ export default function Products(){
 
     return(
         <div id="products" className="p-20">
-        <h3 className="text-xl mb-4">Products</h3>
+        <h3 className="text-xl mb-4">{t("nav.products")}</h3>
         {PRODUCTS.map((p,k)=>(
             <div onMouseOut={(e)=>{handleMouseOut(e)}} onMouseOver={(e)=>{handleMouseOver(e)}} key={k}>
             <Link href={p.url} className="flex flex-col hover:cursor-pointer">
